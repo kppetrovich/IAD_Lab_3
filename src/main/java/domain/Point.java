@@ -1,20 +1,27 @@
-import javax.persistence.*;
+package domain;
+
 import java.io.Serializable;
 
 public class Point implements Serializable {
-    double x;
-    double y;
-    double r;
-    boolean result;
+    private double x;
+    private double y;
+    private double r;
+    private boolean result;
+    private User user;
 
     public Point() {
     }
 
-    public Point(double x, double y, double r, boolean result) {
+    public Point(double x, double y, double r, boolean result, User user) {
         this.x = x;
         this.y = y;
         this.r = r;
         this.result = result;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public double getX() {

@@ -1,25 +1,22 @@
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
+package dao;
+
+import domain.Point;
+import domain.User;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JdbcService {
-    private Connection connection;
+public class PointDao extends Dao {
 
-    public JdbcService(String url, String username, String password) throws SQLException {
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        connection = DriverManager.getConnection(url, username, password);
+    public PointDao(String url, String username, String password) throws SQLException {
+        super(url, username, password);
     }
 
-    public List<Point> getPointsBySessionId(String sessionId) {
+    public List<Point> getPointsByUser(User user) {
         try {
-            PreparedStatement query = connection.prepareStatement("select x, y, r, result from points where session_id = ?");
-            query.setString(1, sessionId);
+            PreparedStatement query = connection.prepareStatement("select x, y, r, result from points where user_id = ?");
+            query.setLong(1, user.getId());
             ResultSet resultSet = query.executeQuery();
             List<Point> points = new ArrayList<>();
             while (resultSet.next()) {
@@ -27,7 +24,7 @@ public class JdbcService {
                 double y = resultSet.getDouble("y");
                 double z = resultSet.getDouble("z");
                 boolean result = resultSet.getBoolean("result");
-                points.add(new Point(x, y, z, result));
+                points.add(new Point(x, y, z, result, user));
             }
             return points;
         } catch (SQLException exception) {
@@ -36,18 +33,20 @@ public class JdbcService {
         }
     }
 
-    public void addPoint(Point point, String sessionId) {
+    public void savePoint(Point point) {
         try {
-            PreparedStatement insertQuery = connection.prepareStatement("insert into points (x, y, r, result, session_id ) values (?, ?, ?, ?, ?)");
+            PreparedStatement insertQuery = connection
+                .prepareStatement("insert into points (x, y, r, result, user_id) values (?, ?, ?, ?, ?)");
             insertQuery.setDouble(1, point.getX());
             insertQuery.setDouble(2, point.getY());
             insertQuery.setDouble(3, point.getR());
             insertQuery.setBoolean(4, point.isResult());
-            insertQuery.setString(5, sessionId);
+            insertQuery.setLong(5, point.getUser().getId());
 
             insertQuery.execute();
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
     }
+
 }
