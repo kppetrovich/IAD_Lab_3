@@ -1,11 +1,20 @@
 package bean;
 
+import config.DatabaseConfig;
+import dao.PointDao;
+import domain.ErrorMessage;
 import domain.Point;
+import domain.User;
 
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.annotation.ManagedProperty;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 import java.io.Serializable;
-import java.util.LinkedList;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @ManagedBean("pointBean")
 @SessionScoped
@@ -13,8 +22,13 @@ public class PointBean implements Serializable {
     private double x = 0;
     private double y = 0;
     private double r = 4;
-    private boolean isInArea;
-    private LinkedList<Point> points = new LinkedList<>();
+    private List<Point> points = new ArrayList<>();
+
+    @ManagedProperty("userBean")
+    private UserBean userBean = null;
+
+    @ManagedProperty("messageBean")
+    private MessageBean messageBean = null;
 
     public double getX() {
         return x;
@@ -40,16 +54,8 @@ public class PointBean implements Serializable {
         this.r = r;
     }
 
-    public LinkedList<Point> getPoints() {
+    public List<Point> getPoints() {
         return points;
-    }
-
-    public void addPoint(Point point) {
-        points.add(point);
-    }
-
-    private double sqr(double value) {
-        return value * value;
     }
 
     public boolean isInArea() {
@@ -63,7 +69,26 @@ public class PointBean implements Serializable {
     }
 
     public void addPoint() {
-        //work with database
+        User owner = getUserFromContext();
+        Point point = new Point(x, y, r, isInArea(), owner);
+        points.add(point);
+
+        try {
+            PointDao pointDao = new PointDao(DatabaseConfig.URL, DatabaseConfig.USERNAME, DatabaseConfig.PASSWORD);
+            pointDao.savePoint(point);
+        } catch (SQLException e) {
+            messageBean.setErrorMessage(ErrorMessage.SERVER_UNAVAILABLE);
+        }
+    }
+
+    private double sqr(double value) {
+        return value * value;
+    }
+
+    private User getUserFromContext() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        return userBean.getUsersMap().get(session.getId());
     }
 
 }
