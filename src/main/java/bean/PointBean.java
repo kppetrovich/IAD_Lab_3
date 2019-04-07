@@ -58,6 +58,11 @@ public class PointBean implements Serializable {
         return points;
     }
 
+    public void replacePoints(List<Point> points) {
+        this.points.clear();
+        this.points.addAll(points);
+    }
+
     public boolean isInArea() {
         if ((x >= 0) && (y >= 0) && (sqr(r / 2) >= sqr(x) + sqr(y))) {
             return true;

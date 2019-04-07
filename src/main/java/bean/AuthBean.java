@@ -1,6 +1,7 @@
 package bean;
 
 import config.DatabaseConfig;
+import dao.PointDao;
 import dao.UserDao;
 import domain.ErrorMessage;
 import domain.User;
@@ -25,10 +26,20 @@ public class AuthBean implements Serializable {
     @ManagedProperty("messageBean")
     private MessageBean messageBean = null;
 
+    @ManagedProperty("pointBean")
+    private PointBean pointBean = null;
+
     private void authorizeUser(User user) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
         userBean.getUsersMap().put(session.getId(), user);
+
+        try {
+            PointDao pointDao = new PointDao(DatabaseConfig.URL, DatabaseConfig.USERNAME, DatabaseConfig.PASSWORD);
+            pointBean.replacePoints(pointDao.getPointsByUser(user));
+        } catch (SQLException e) {
+            messageBean.setErrorMessage(ErrorMessage.SERVER_UNAVAILABLE);
+        }
     }
 
     public boolean signIn() {
