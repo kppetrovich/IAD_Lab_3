@@ -21,14 +21,24 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
-    <managed-bean>
-        <managed-bean-name>userBean</managed-bean-name>
-        <managed-bean-class>bean.UserBean</managed-bean-class>
-        <managed-bean-scope>application</managed-bean-scope>
-    </managed-bean>
-    <managed-bean>
-        <managed-bean-name>authBean</managed-bean-name>
-        <managed-bean-class>bean.AuthBean</managed-bean-class>
-        <managed-bean-scope>application</managed-bean-scope>
-    </managed-bean>
+<!--    <managed-bean>-->
+<!--        <managed-bean-name>userBean</managed-bean-name>-->
+<!--        <managed-bean-class>bean.UserBean</managed-bean-class>-->
+<!--        <managed-bean-scope>application</managed-bean-scope>-->
+<!--    </managed-bean>-->
+<!--    <managed-bean>-->
+<!--        <managed-bean-name>authBean</managed-bean-name>-->
+<!--        <managed-bean-class>bean.AuthBean</managed-bean-class>-->
+<!--        <managed-bean-scope>session</managed-bean-scope>-->
+<!--    </managed-bean>-->
+<!--    <managed-bean>-->
+<!--        <managed-bean-name>messageBean</managed-bean-name>-->
+<!--        <managed-bean-class>bean.MessageBean</managed-bean-class>-->
+<!--        <managed-bean-scope>session</managed-bean-scope>-->
+<!--    </managed-bean>-->
+<!--    <managed-bean>-->
+<!--        <managed-bean-name>pointBean</managed-bean-name>-->
+<!--        <managed-bean-class>bean.PointBean</managed-bean-class>-->
+<!--        <managed-bean-scope>session</managed-bean-scope>-->
+<!--    </managed-bean>-->
 </faces-config>

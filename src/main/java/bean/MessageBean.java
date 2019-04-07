@@ -1,10 +1,10 @@
 package bean;
 
-import javax.annotation.ManagedBean;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
 
-@ManagedBean("messageBean")
+@ManagedBean(name = "messageBean", eager = true)
 @SessionScoped
 public class MessageBean implements Serializable {
     private String errorMessage = "";

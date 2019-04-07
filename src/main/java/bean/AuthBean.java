@@ -4,20 +4,18 @@ import config.DatabaseConfig;
 import dao.PointDao;
 import dao.UserDao;
 import domain.ErrorMessage;
-import domain.Point;
 import domain.User;
 
-import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.annotation.ManagedProperty;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.Map;
 
-@ManagedBean("authBean")
+@ManagedBean(name = "authBean", eager = true)
 @SessionScoped
 public class AuthBean implements Serializable {
     private String username;
@@ -26,23 +24,48 @@ public class AuthBean implements Serializable {
     private PointDao pointDao = null;
 
     @PostConstruct
-    private void postConstruct() {
+    public void postConstruct() {
         try {
             userDao = new UserDao(DatabaseConfig.URL, DatabaseConfig.USERNAME, DatabaseConfig.PASSWORD);
             pointDao = new PointDao(DatabaseConfig.URL, DatabaseConfig.USERNAME, DatabaseConfig.PASSWORD);
         } catch (SQLException e) {
             messageBean.setErrorMessage(ErrorMessage.SERVER_UNAVAILABLE);
         }
+        System.out.println("MessageBean is null: " + (messageBean == null));
     }
 
-    @ManagedProperty("userBean")
-    private UserBean userBean = null;
+    @ManagedProperty("#{userBean}")
+    private UserBean userBean;
 
-    @ManagedProperty("messageBean")
-    private MessageBean messageBean = null;
+    public UserBean getUserBean() {
+        return userBean;
+    }
 
-    @ManagedProperty("pointBean")
-    private PointBean pointBean = null;
+    public void setUserBean(UserBean userBean) {
+        this.userBean = userBean;
+    }
+
+    public MessageBean getMessageBean() {
+        return messageBean;
+    }
+
+    public void setMessageBean(MessageBean messageBean) {
+        this.messageBean = messageBean;
+    }
+
+    public PointBean getPointBean() {
+        return pointBean;
+    }
+
+    public void setPointBean(PointBean pointBean) {
+        this.pointBean = pointBean;
+    }
+
+    @ManagedProperty("#{messageBean}")
+    private MessageBean messageBean;
+
+    @ManagedProperty("#{pointBean}")
+    private PointBean pointBean;
 
     private void authorizeUser(User user) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -62,7 +85,9 @@ public class AuthBean implements Serializable {
     public boolean signIn() {
         try {
             User receivedUser = userDao.findUserByUsername(username);
+            System.out.println("ReceivedUsername is null: " + (receivedUser == null));
             if (receivedUser.getPassword().equals(password)) {
+                System.out.println("Passwords is the same");
                 authorizeUser(receivedUser);
                 return true;
             } else {

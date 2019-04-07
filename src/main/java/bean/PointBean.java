@@ -6,9 +6,9 @@ import domain.ErrorMessage;
 import domain.Point;
 import domain.User;
 
-import javax.annotation.ManagedBean;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.annotation.ManagedProperty;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@ManagedBean("pointBean")
+@ManagedBean(name = "pointBean", eager = true)
 @SessionScoped
 public class PointBean implements Serializable {
     private double x = 0;
@@ -24,10 +24,10 @@ public class PointBean implements Serializable {
     private double r = 4;
     private List<Point> points = new ArrayList<>();
 
-    @ManagedProperty("userBean")
+    @ManagedProperty("#{userBean}")
     private UserBean userBean = null;
 
-    @ManagedProperty("messageBean")
+    @ManagedProperty("#{messageBean}")
     private MessageBean messageBean = null;
 
     public double getX() {
@@ -96,4 +96,19 @@ public class PointBean implements Serializable {
         return userBean.getUsersMap().get(session.getId());
     }
 
+    public UserBean getUserBean() {
+        return userBean;
+    }
+
+    public void setUserBean(UserBean userBean) {
+        this.userBean = userBean;
+    }
+
+    public MessageBean getMessageBean() {
+        return messageBean;
+    }
+
+    public void setMessageBean(MessageBean messageBean) {
+        this.messageBean = messageBean;
+    }
 }
