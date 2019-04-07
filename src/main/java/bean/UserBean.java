@@ -11,19 +11,28 @@ import java.util.Map;
 @ManagedBean("userBean")
 @ApplicationScoped
 public class UserBean implements Serializable {
-
     private Map<String, User> usersMap = new HashMap<>();
-    private boolean isAuthFlag = true;
+    private String username;
+    private String password;
 
-    public boolean isAuthFlag() {
-        return this.isAuthFlag;
+
+    public String getUsername() {
+        return username;
     }
 
-    public void revertAuthFlag() {
-        this.isAuthFlag = !this.isAuthFlag;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     public Map<String, User> getUsersMap() {
         return usersMap;
     }
+
 }

@@ -42,39 +42,22 @@
 
 
             <br/>
-            <h:panelGroup rendered="#{userBean.isAuthFlag()}">
-            <h:form hidden="true" styleClass="header_3">
+            <h:form styleClass="header_3">
                 <h:outputText value="Username: " />
-                <h:inputText id="username" value="#{login.user}"></h:inputText>
-                <h:message for="username"></h:message>
-                <br></br><br></br>
+                <h:inputText id="username" value="#{userBean.username}"/>
+                <h:message for="username"/>
+                <br/><br/>
 
                 <h:outputText value="Password: " />
-                <h:inputSecret id="password" value="#{login.pwd}"></h:inputSecret>
-                <h:message for="password"></h:message>
-                <br></br><br></br>
-
-                <h:commandButton styleClass="buttonToMain"  action="#{login.validateUsernamePassword}"
-                                 value="Login"></h:commandButton>
+                <h:inputSecret id="password" value="#{userBean.password}"
+                validator=""/>
+                <h:message for="password"/>
+                <br/><br/>
+                <h:commandButton styleClass="buttonToMain"  action="#{}"
+                                 value="Login"/>
+                <h:commandButton styleClass="buttonToMain"  action="#{}"
+                                 value="Sign up"/>
             </h:form>
-            </h:panelGroup>
-            <h:panelGroup rendered="#{!userBean.isAuthFlag()}">
-                <h:form styleClass="header_3">
-                    <h:outputText value="Username: " />
-                    <h:inputText id="usernameIn" value="#{login.user}"></h:inputText>
-                    <h:message for="username"></h:message>
-                    <br></br><br></br>
-
-                    <h:outputText value="Password: " />
-                    <h:inputSecret id="passwordIn" value="#{login.pwd}"></h:inputSecret>
-                    <h:message for="password"></h:message>
-                    <br></br><br></br>
-
-                    <h:commandButton styleClass="buttonToMain"  action="#{login.validateUsernamePassword}"
-                                     value="Sign up"></h:commandButton>
-                </h:form>
-            </h:panelGroup>
-
             <br/>
 
             <div id = "clockAndCalendar">
@@ -91,10 +74,6 @@
                         </td>
                     </tr>
                 </table>
-
-                <br/>
-
-                <h:button styleClass = "buttonToMain" value="Registration" action="#{userBean.revertAuthFlag()}"/>
             </div>
 
         </center>
