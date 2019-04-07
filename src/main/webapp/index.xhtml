@@ -57,6 +57,7 @@
                                  value="Login"/>
                 <h:commandButton styleClass="buttonToMain"  action="#{authBean.signUp}"
                                  value="Sign up"/>
+                <h:outputLabel value="#{messageBean.currentMessage}" rendered="#{not empty messageBean.currentMessage}" />
             </h:form>
             <br/>
 
