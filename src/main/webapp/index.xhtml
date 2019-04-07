@@ -49,13 +49,13 @@
                 <br/><br/>
 
                 <h:outputText value="Password: " />
-                <h:inputSecret id="password" value="#{userBean.password} "
+                <h:inputSecret id="password" value="#{userBean.password}"
                                maxlength="64" minlenght="3"/>
                 <h:message for="password"/>
                 <br/><br/>
-                <h:commandButton styleClass="buttonToMain"  action="#{authBean.signIn()}"
+                <h:commandButton styleClass="buttonToMain"  action="#{authBean.signIn}"
                                  value="Login"/>
-                <h:commandButton styleClass="buttonToMain"  action="#{authBean.signUp()}"
+                <h:commandButton styleClass="buttonToMain"  action="#{authBean.signUp}"
                                  value="Sign up"/>
             </h:form>
             <br/>
