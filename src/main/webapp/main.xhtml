@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: Pavel
+  Date: 06.04.2019
+  Time: 18:35
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://java.sun.com/jsf/composite">
+
+<h:head>
+    <title>Lab_3</title>
+    <h:outputStylesheet library="styles" name="main.css"/>
+    <link rel="stylesheet" href="resources/styles/main.css" type="text/css"/>
+    <h:outputScript library="scripts" name="validate.js"/>
+</h:head>
+
+<h:body styleClass="main">
+    <f:view>
+        <center>
+            <div class="header_1">
+                <table class="table_header_1">
+                    <tr>
+                        <td><label> Лаборатоная работа №3.</label></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="header_2">
+                <table class="table_header_2">
+                    <tr>
+                        <td></td>
+                        <td>Группа: P3202</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Вариант: 851108</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Выполнил: Куркин Павел Петрович</td>
+                    </tr>
+                </table>
+            </div>
+            <br/>
+            <div class="container form" id="inputs">
+                <h:button styleClass="moveToStart" value="Назад" outcome="index"/>
+                <table class="input_table">
+                    <tr>
+                        <td>
+                            <h:form class="form" id="form">
+                                <table>
+                                    <tr>
+                                        <td><label id="choose"> Выбор значений:</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="rowX">
+                                            <h:outputLabel class="label" value="&#8226; Координата X: "/>
+                                            <h:outputText class="x_input" id="X_buttion" value="#{point.x}"/>
+                                            <br/>
+                                            <h:commandButton class="input_X" value="-5" type="submit" onclick=""/>
+                                            <h:commandButton class="input_X" value="-4" type="submit"/>
+                                            <h:commandButton class="input_X" value="-3" type="submit"/>
+                                            <h:commandButton class="input_X" value="-2" type="submit"/>
+                                            <h:commandButton class="input_X" value="-1" type="submit"/>
+                                            <h:commandButton class="input_X" value="0" type="submit"/>
+                                            <h:commandButton class="input_X" value="1" type="submit"/>
+                                            <h:commandButton class="input_X" value="2" type="submit"/>
+                                            <h:commandButton class="input_X" value="3" type="submit"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td id="rowY">
+                                            <h:outputLabel class="label" value="&#8226; Координата Y: "/><br/>
+                                            <h:inputText class="input_Y" id="Y" a:placeholder="(-5;3)" maxlength="6"
+                                                         name="Y"
+                                                         value="#{point.y}" onfocus="removeError();">
+                                            </h:inputText><br/>
+                                            <div id="error" class="error">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h:outputLabel class="label" value="&#8226; Радиус R: "/>
+                                            <h:outputText class="input_R" id="R_text" value="#{point.r}"/>
+                                            <br/>
+                                            <h:selectOneMenu value="#{point.r}">
+                                                <f:selectItem itemValue="1" itemLabel="1"/>
+                                                <f:selectItem itemValue="2" itemLabel="2"/>
+                                                <f:selectItem itemValue="3" itemLabel="3"/>
+                                                <f:selectItem itemValue="4" itemLabel="4"/>
+                                                <f:selectItem itemValue="5" itemLabel="5"/>
+                                            </h:selectOneMenu>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="submit" id="validationButton" class="submitButton"
+                                                             value="Проверить" />
+                                            <h:commandButton id="submit" action="#{point.addPoint()}"
+                                                             style="display: none">
+                                            </h:commandButton>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </h:form>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+
+            <br/>
+        </center>
+    </f:view>
+
+</h:body>
+
+</html>
