@@ -44,18 +44,18 @@
             <br/>
             <h:form styleClass="header_3">
                 <h:outputText value="Username: " />
-                <h:inputText id="username" value="#{userBean.username}"/>
+                <h:inputText id="username" value="#{userBean.username}" maxlength="64" minlenght="3"/>
                 <h:message for="username"/>
                 <br/><br/>
 
                 <h:outputText value="Password: " />
-                <h:inputSecret id="password" value="#{userBean.password}"
-                validator=""/>
+                <h:inputSecret id="password" value="#{userBean.password} "
+                               maxlength="64" minlenght="3"/>
                 <h:message for="password"/>
                 <br/><br/>
-                <h:commandButton styleClass="buttonToMain"  action="#{}"
+                <h:commandButton styleClass="buttonToMain"  action="#{authBean.signIn()}"
                                  value="Login"/>
-                <h:commandButton styleClass="buttonToMain"  action="#{}"
+                <h:commandButton styleClass="buttonToMain"  action="#{authBean.signUp()}"
                                  value="Sign up"/>
             </h:form>
             <br/>

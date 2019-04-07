@@ -26,4 +26,9 @@
         <managed-bean-class>bean.UserBean</managed-bean-class>
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>authBean</managed-bean-name>
+        <managed-bean-class>bean.AuthBean</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
 </faces-config>
