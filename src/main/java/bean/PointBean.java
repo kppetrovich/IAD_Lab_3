@@ -1,10 +1,13 @@
+package bean;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import domain.Point;
+
+import javax.annotation.ManagedBean;
+import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.LinkedList;
 
-@ManagedBean(name = "point", eager = true)
+@ManagedBean("pointBean")
 @SessionScoped
 public class PointBean implements Serializable {
     private double x = 0;
@@ -45,17 +48,18 @@ public class PointBean implements Serializable {
         points.add(point);
     }
 
-    public boolean isInArea() {
-        if ((x >= 0) && (y >= 0) && (y <= (r / 2 - x) / 2)) {
+    private double sqr(double value) {
+        return value * value;
+    }
 
+    public boolean isInArea() {
+        if ((x >= 0) && (y >= 0) && (sqr(r / 2) >= sqr(x) + sqr(y))) {
             return true;
-        } else {
-            if ((x <= 0) && (y >= 0) && ((x * x + y * y) <= r / 2 * r / 2 / 4)) {
-                return true;
-            } else {
-                return (x <= 0) && (y <= 0) && (x >= -r / 2) && (y >= -r / 2);
-            }
         }
+        if (x >= 0 && y <= 0 && x <= r && Math.abs(y) <= r) {
+            return true;
+        }
+        return (x <= 0 && y <= 0 && y >= -2 * x - r / 2);
     }
 
     public void addPoint() {
