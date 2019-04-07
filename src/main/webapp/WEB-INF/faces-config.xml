@@ -21,4 +21,9 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
+    <managed-bean>
+        <managed-bean-name>userBean</managed-bean-name>
+        <managed-bean-class>bean.UserBean</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
 </faces-config>

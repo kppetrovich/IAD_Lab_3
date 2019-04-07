@@ -25,6 +25,15 @@ body.main{
     height: 95px;
     font-size: 25pt;
 }
+.header_3 {
+    background-color: rgba(238, 253, 247, 0.9);
+    height: 95px;
+    font-size: 15pt;
+    font-family: monospace;
+    color: #000000;
+    border: 1px solid blue;
+    filter: alpha(Opacity=70);
+}
 .table_header_2 td {
     text-align: center;
     font-size: 18pt;

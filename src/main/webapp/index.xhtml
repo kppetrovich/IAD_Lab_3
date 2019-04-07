@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Created by IntelliJ IDEA.
-  domain.User: Pavel
-  Date: 06.04.2019
-  Time: 18:35
--->
 <!DOCTYPE html
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -48,6 +42,40 @@
 
 
             <br/>
+            <h:panelGroup rendered="#{userBean.isAuthFlag()}">
+            <h:form hidden="true" styleClass="header_3">
+                <h:outputText value="Username: " />
+                <h:inputText id="username" value="#{login.user}"></h:inputText>
+                <h:message for="username"></h:message>
+                <br></br><br></br>
+
+                <h:outputText value="Password: " />
+                <h:inputSecret id="password" value="#{login.pwd}"></h:inputSecret>
+                <h:message for="password"></h:message>
+                <br></br><br></br>
+
+                <h:commandButton styleClass="buttonToMain"  action="#{login.validateUsernamePassword}"
+                                 value="Login"></h:commandButton>
+            </h:form>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{!userBean.isAuthFlag()}">
+                <h:form styleClass="header_3">
+                    <h:outputText value="Username: " />
+                    <h:inputText id="usernameIn" value="#{login.user}"></h:inputText>
+                    <h:message for="username"></h:message>
+                    <br></br><br></br>
+
+                    <h:outputText value="Password: " />
+                    <h:inputSecret id="passwordIn" value="#{login.pwd}"></h:inputSecret>
+                    <h:message for="password"></h:message>
+                    <br></br><br></br>
+
+                    <h:commandButton styleClass="buttonToMain"  action="#{login.validateUsernamePassword}"
+                                     value="Sign up"></h:commandButton>
+                </h:form>
+            </h:panelGroup>
+
+            <br/>
 
             <div id = "clockAndCalendar">
                 <table id = "startTable">
@@ -66,7 +94,7 @@
 
                 <br/>
 
-                <h:button styleClass = "buttonToMain" value="Переход на главную" outcome="main"/>
+                <h:button styleClass = "buttonToMain" value="Registration" action="#{userBean.revertAuthFlag()}"/>
             </div>
 
         </center>
