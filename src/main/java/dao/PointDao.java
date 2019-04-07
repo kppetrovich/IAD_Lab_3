@@ -15,20 +15,20 @@ public class PointDao extends Dao {
 
     public List<Point> getPointsByUser(User user) {
         try {
-            PreparedStatement query = connection.prepareStatement("select x, y, r, result from points where user_id = ?");
+            PreparedStatement query = connection.prepareStatement("select x, y, r, result from POINTSS where user_id = ?");
             query.setLong(1, user.getId());
             ResultSet resultSet = query.executeQuery();
             List<Point> points = new ArrayList<>();
             while (resultSet.next()) {
                 double x = resultSet.getDouble("x");
                 double y = resultSet.getDouble("y");
-                double z = resultSet.getDouble("z");
+                double r = resultSet.getDouble("r");
                 boolean result = resultSet.getBoolean("result");
-                points.add(new Point(x, y, z, result, user));
+                points.add(new Point(x, y, r, result, user));
             }
             return points;
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -36,7 +36,7 @@ public class PointDao extends Dao {
     public void savePoint(Point point) {
         try {
             PreparedStatement insertQuery = connection
-                .prepareStatement("insert into points (x, y, r, result, user_id) values (?, ?, ?, ?, ?)");
+                .prepareStatement("insert into POINTSS (x, y, r, result, user_id) values (?, ?, ?, ?, ?)");
             insertQuery.setDouble(1, point.getX());
             insertQuery.setDouble(2, point.getY());
             insertQuery.setDouble(3, point.getR());
