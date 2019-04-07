@@ -1,49 +1,49 @@
-<svg width="500" height="500" xmlns="http://www.w3.org/2000/svg">
-    <rect x="0" y="0" width="500" height="500" fill="white"/>
-    <!-- part circle -->
-    <circle r="100" cx="250" cy="250" fill="blue"/>
+<svg width="250" height="250" xmlns="http://www.w3.org/2000/svg">
     <rect x="0" y="0" width="250" height="250" fill="white"/>
-    <rect x="0" y="250" width="500" height="250" fill="white"/>
+    <!-- part circle -->
+    <circle r="50" cx="125" cy="125" fill="blue"/>
+    <rect x="0" y="0" width="125" height="125" fill="white"/>
+    <rect x="0" y="125" width="250" height="125" fill="white"/>
 
     <!-- square -->
-    <rect x="250" y="250" width="200" height="200" fill="blue"/>
+    <rect x="125" y="125" width="100" height="100" fill="blue"/>
 
     <!-- triangle -->
-    <polygon points="150,250 250,250 250,450" fill="blue"/>
+    <polygon points="75,125 125,125 125,225" fill="blue"/>
 
     <!-- OX -->
-    <line x1="0" y1="250" x2="500" y2="250" stroke="black" stroke-width="2"/>
-    <line x1="490" y1="245" x2="500" y2="250" stroke="black" stroke-width="2"/>
-    <line x1="490" y1="255" x2="500" y2="250" stroke="black" stroke-width="2"/>
+    <line x1="0" y1="125" x2="250" y2="125" stroke="black" stroke-width="2"/>
+    <line x1="245" y1="122.5" x2="250" y2="125" stroke="black" stroke-width="2"/>
+    <line x1="245" y1="127.5" x2="250" y2="125" stroke="black" stroke-width="2"/>
 
     <!-- OY -->
-    <line x1="250" y1="500" x2="250" y2="0" stroke="black" stroke-width="2"/>
-    <line x1="245" y1="10" x2="250" y2="0" stroke="black" stroke-width="2"/>
-    <line x1="255" y1="10" x2="250" y2="0" stroke="black" stroke-width="2"/>
+    <line x1="125" y1="250" x2="125" y2="0" stroke="black" stroke-width="2"/>
+    <line x1="127.5" y1="5" x2="125" y2="0" stroke="black" stroke-width="2"/>
+    <line x1="127.5" y1="5" x2="125" y2="0" stroke="black" stroke-width="2"/>
 
     <!-- OX dots -->
-    <line x1="50" y1="245" x2="50" y2="255" stroke="black" stroke-width="2"/>
-    <line x1="150" y1="245" x2="150" y2="255" stroke="black" stroke-width="2"/>
-    <line x1="350" y1="245" x2="350" y2="255" stroke="black" stroke-width="2"/>
-    <line x1="450" y1="245" x2="450" y2="255" stroke="black" stroke-width="2"/>
+    <line x1="25" y1="127.5" x2="25" y2="127.5" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="127.5" x2="75" y2="127.5" stroke="black" stroke-width="2"/>
+    <line x1="175" y1="127.5" x2="175" y2="127.5" stroke="black" stroke-width="2"/>
+    <line x1="225" y1="127.5" x2="225" y2="127.5" stroke="black" stroke-width="2"/>
 
 
     <!-- OY dots -->
-    <line x1="245" y1="50" x2="255" y2="50" stroke="black" stroke-width="2"/>
-    <line x1="245" y1="150" x2="255" y2="150" stroke="black" stroke-width="2"/>
-    <line x1="245" y1="350" x2="255" y2="350" stroke="black" stroke-width="2"/>
-    <line x1="245" y1="450" x2="255" y2="450" stroke="black" stroke-width="2"/>
+    <line x1="122.5" y1="25" x2="127.5" y2="25" stroke="black" stroke-width="2"/>
+    <line x1="122.5" y1="75" x2="127.5" y2="75" stroke="black" stroke-width="2"/>
+    <line x1="122.5" y1="175" x2="127.5" y2="175" stroke="black" stroke-width="2"/>
+    <line x1="122.5" y1="225" x2="127.5" y2="225" stroke="black" stroke-width="2"/>
 
     <!-- OX text -->
-    <text x="45" y="240">-R</text>
-    <text x="135" y="240">-R/2</text>
-    <text x="235" y="240">0</text>
-    <text x="350" y="240">R/2</text>
-    <text x="445" y="240">R</text>
+    <text x="22.5" y="120">-R</text>
+    <text x="67.5" y="120">-R/2</text>
+    <text x="117.5" y="120">0</text>
+    <text x="175" y="120">R/2</text>
+    <text x="222.5" y="120">R</text>
 
     <!-- OY text -->
-    <text x="220" y="50">R</text>
-    <text x="210" y="150">R/2</text>
-    <text x="210" y="350">-R/2</text>
-    <text x="220" y="450">-R</text>
+    <text x="110" y="25">R</text>
+    <text x="105" y="75">R/2</text>
+    <text x="105" y="175">-R/2</text>
+    <text x="110" y="225">-R</text>
 </svg>
