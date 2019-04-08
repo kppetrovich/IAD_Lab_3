@@ -16,5 +16,4 @@ public class UserBean implements Serializable {
     public Map<String, User> getUsersMap() {
         return usersMap;
     }
-
 }

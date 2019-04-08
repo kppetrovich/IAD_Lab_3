@@ -33,6 +33,16 @@ public class PointDao extends Dao {
         }
     }
 
+    public void removeAllByUser(User user) {
+        try {
+            PreparedStatement query = connection.prepareStatement("delete from POINTSS where USER_ID = ?");
+            query.setLong(1, user.getId());
+            query.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void savePoint(Point point) {
         try {
             PreparedStatement insertQuery = connection
@@ -44,8 +54,8 @@ public class PointDao extends Dao {
             insertQuery.setLong(5, point.getUser().getId());
 
             insertQuery.execute();
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

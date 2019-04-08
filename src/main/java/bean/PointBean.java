@@ -6,6 +6,7 @@ import domain.ErrorMessage;
 import domain.Point;
 import domain.User;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -29,6 +30,18 @@ public class PointBean implements Serializable {
 
     @ManagedProperty("#{messageBean}")
     private MessageBean messageBean = null;
+
+    private PointDao pointDao = null;
+
+    @PostConstruct
+    public void postConstruct() {
+        try {
+            pointDao = new PointDao(DatabaseConfig.URL, DatabaseConfig.USERNAME, DatabaseConfig.PASSWORD);
+        } catch (SQLException e) {
+            messageBean.setErrorMessage(ErrorMessage.SERVER_UNAVAILABLE);
+        }
+        System.out.println("MessageBean is null: " + (messageBean == null));
+    }
 
     public double getX() {
         return x;
@@ -63,6 +76,11 @@ public class PointBean implements Serializable {
         this.points.addAll(points);
     }
 
+    public void clearPoints() {
+        this.points.clear();
+        pointDao.removeAllByUser(getUserFromContext());
+    }
+
     public boolean isInArea() {
         if ((x >= 0) && (y >= 0) && (sqr(r / 2) >= sqr(x) + sqr(y))) {
             return true;
@@ -84,12 +102,7 @@ public class PointBean implements Serializable {
         System.out.println("IsInArea = " + isInArea());
         System.out.println("Username = " + owner.getUsername());
 
-        try {
-            PointDao pointDao = new PointDao(DatabaseConfig.URL, DatabaseConfig.USERNAME, DatabaseConfig.PASSWORD);
-            pointDao.savePoint(point);
-        } catch (SQLException e) {
-            messageBean.setErrorMessage(ErrorMessage.SERVER_UNAVAILABLE);
-        }
+        pointDao.savePoint(point);
     }
 
     private double sqr(double value) {
