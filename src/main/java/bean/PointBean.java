@@ -14,6 +14,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +49,8 @@ public class PointBean implements Serializable {
     }
 
     public void setX(double x) {
-        this.x = x;
+        DecimalFormat df = new DecimalFormat("#.####");
+        this.x = Double.parseDouble(df.format(x));
     }
 
     public double getY() {
@@ -56,7 +58,8 @@ public class PointBean implements Serializable {
     }
 
     public void setY(double y) {
-        this.y = y;
+        DecimalFormat df = new DecimalFormat("#.####");
+        this.y = Double.parseDouble(df.format(y));
     }
 
     public double getR() {
@@ -88,7 +91,7 @@ public class PointBean implements Serializable {
         if (x >= 0 && y <= 0 && x <= r && Math.abs(y) <= r) {
             return true;
         }
-        return (x <= 0 && y <= 0 && y >= -2 * x - r / 2);
+        return ((x <= 0) && (y <= 0) && (y >= ((-2 * x) - r)));
     }
 
     public void addPoint() {

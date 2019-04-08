@@ -64,7 +64,7 @@
                                     <tr>
                                         <td id="rowX">
                                             <h:outputLabel class="label" value="&#8226; Координата X: "/>
-                                            <h:outputText class="x_input" id="X_buttion" value="#{pointBean.x}"/>
+                                            <h:outputText class="x_input" id="X_buttion" value="#{pointBean.x}" />
                                             <br/>
                                             <h:commandButton class="input_X" value="-5" type="submit">
                                                 <f:setPropertyActionListener target="#{pointBean.x}" value="-5"/>
@@ -97,23 +97,19 @@
                                         <td style="width: 100px !important;"/>
                                         <td>
                                             <p:outputPanel id="graphPanel">
-                                                <svg id="picture" width="454" height="206" onclick="getPoint(event)"
+                                                <svg id="picture" width="250" height="250" onclick="getPoint(event)"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <defs>
-                                                        <pattern id="image" patternUnits="userSpaceOnUse" width="454"
-                                                                 height="206">
-                                                            <image x="0" y="0" width="400" height="400"
+                                                        <pattern id="image" patternUnits="userSpaceOnUse" width="250"
+                                                                 height="250">
+                                                            <image x="0" y="0" width="250" height="250"
                                                                    xlink:href="resources/images/picture.svg"/>
                                                         </pattern>
                                                     </defs>
-                                                    <polygon points="0,0 454,0 454,206 0,206" fill="url(#image)"/>
-                                                    <text id="picture_x" x="445" y="115" font-family="monospace"
-                                                          font-size="14" fill="gray">#{pointBean.r}</text>
-                                                    <text id="picture_y" x="228" y="13" font-family="monospace"
-                                                          font-size="14" fill="gray">#{pointBean.r/2}</text>
+                                                    <polygon points="0,0 250,0 250,250 0,250" fill="url(#image)"/>
                                                     <ui:repeat value="#{pointBean.points}" var="point">
-                                                        <circle cx="#{217 / point.r * point.x + 227}"
-                                                                cy="#{206 - (186 / point.r * point.y + 103)}"
+                                                        <circle cx="#{100 / point.r * point.x + 125}"
+                                                                cy="#{250 - (100 / point.r * point.y + 125)}"
                                                                 stroke="black"
                                                                 fill="#{point.result eq true ? 'green' : 'red'}"
                                                                 class="point" r="3"/>
