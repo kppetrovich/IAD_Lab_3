@@ -17,16 +17,16 @@ window.addEventListener("load", setTime);
 function createCalendar() {
     let date = new Date();
     let year = date.getFullYear();
-    let month = date.getMonth() + 1;
+    let month = date.getMonth();
     let day = date.getDate();
     let dayOfWeek = date.getDay();
     let nameOfMonth = [
-        'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Ноябрь', 'Декабрь',
+        'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Ноябрь', 'Декабрь'
     ];
     let numOfMonth = [
         31, 29 ,31 ,30 ,31 ,30 ,31 ,31 ,30 ,31 ,30 ,31
     ];
-    document.getElementById("tableCalendar").innerHTML += "<caption>" + nameOfMonth[month-2]+ " " + year + "</caption>";
+    document.getElementById("tableCalendar").innerHTML += "<caption>" + nameOfMonth[month]+ " " + year + "</caption>";
     document.getElementById("tableCalendar").innerHTML += "<tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th></tr>";
     var num = 1;
     var str = "<tr>";
@@ -51,7 +51,7 @@ function createCalendar() {
         var temp = num + 6;
         for (var j = num; j<=temp; j++) {
 
-            if (j <= numOfMonth[month-1]) {
+            if (j <= numOfMonth[month]) {
                 if (j === day) {
                     week += "<td style='background: #1b30a7;color: white'>" + j + "</td>";
                 } else {

@@ -52,7 +52,7 @@
             </div>
             <br/>
             <div class="container form" id="inputs">
-                <h:button styleClass="moveToStart" value="Назад" outcome="index"/>
+
                 <table class="input_table">
                     <tr>
                         <td>
@@ -128,14 +128,9 @@
                                     <tr>
                                         <td id="rowY">
                                             <h:outputLabel class="label" value="&#8226; Координата Y: "/><br/>
-                                            <!--                                            <h:inputText class="input_Y" id="Y" a:placeholder="(-5;3)" maxlength="6"-->
-                                            <!--                                                         name="Y"-->
-                                            <!--                                                         value="#{pointBean.y}">-->
-                                            <!--                                                <f:ajax/>-->
-                                            <!--                                                &lt;!&ndash;<f:validateDoubleRange minumim="-3" maximum="5"/>&ndash;&gt;-->
-                                            <!--                                            </h:inputText><br/>-->
-                                            <h:outputText class="x_input" id="Y_buttion" value="#{pointBean.y}"/>
-                                            <h:inputText styleClass="label" id="Y" value="#{pointBean.y}"/>
+                                            <h:inputText styleClass="label" id="Y" maxlength="5" value="#{pointBean.y}">
+                                                <f:validateDoubleRange minumim="-3.0" maximum="5.0"/>
+                                            </h:inputText>
                                             <div id="error" class="error">
                                             </div>
                                         </td>
@@ -143,7 +138,8 @@
                                     <tr>
                                         <td>
                                             <h:outputLabel class="label" value="&#8226; Радиус R: "/>
-                                            <h:outputText class="input_R" id="R_text" value="#{pointBean.r}"/>
+                                            <h:outputText style="display: none" class="input_R" id="R_text"
+                                                          value="#{pointBean.r}"/>
                                             <br/>
                                             <h:selectOneMenu value="#{pointBean.r}">
                                                 <f:selectItem itemValue="1" itemLabel="1"/>
@@ -160,6 +156,14 @@
                                             <h:commandButton styleClass="buttonToMain" id="submit" value="Проверить"
                                                              action="#{pointBean.addPoint()}"/>
                                         </td>
+                                        <td style="width: 25px">
+                                            <h:button styleClass="buttonToMain" value="Назад" outcome="index"/>
+                                        </td>
+                                        <td style="width: 25px">
+                                            <h:commandButton styleClass="buttonToMain" value="Очистить"
+                                                             action="#{pointBean.clearPoints()}"/>
+                                        </td>
+
                                     </tr>
                                 </table>
 
