@@ -19,7 +19,7 @@
             <div class="header_1">
                 <table class="table_header_1">
                     <tr>
-                        <td> <label> Лаборатоная работа №3.</label></td>
+                        <td><label> Лаборатоная работа №3.</label></td>
                     </tr>
                 </table>
             </div>
@@ -27,15 +27,15 @@
                 <table class="table_header_2">
                     <tr>
                         <td></td>
-                        <td>Группа: P3202 </td>
+                        <td>Группа: P3202</td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>Вариант: 851108 </td>
+                        <td>Вариант: 851108</td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td >Выполнил: Куркин Павел Петрович</td>
+                        <td>Выполнил: Куркин Павел Петрович</td>
                     </tr>
                 </table>
             </div>
@@ -43,26 +43,26 @@
 
             <br/>
             <h:form styleClass="header_3">
-                <h:outputText value="Username: " />
-                <h:inputText id="username" value="#{authBean.username}" maxlength="64" minlenght="3"/>
+                <h:outputText value="Username: "/>
+                <h:inputText id="username" value="#{authBean.username}" maxlength="64" minlenght="3" required="true"/>
                 <h:message for="username"/>
                 <br/><br/>
 
-                <h:outputText value="Password: " />
+                <h:outputText value="Password: "/>
                 <h:inputSecret id="password" value="#{authBean.password}"
-                               maxlength="64" minlenght="3"/>
+                               maxlength="64" minlenght="3" required="true"/>
                 <h:message for="password"/>
                 <br/><br/>
-                <h:commandButton styleClass="buttonToMain"  action="#{authBean.signIn}"
+                <h:commandButton styleClass="buttonToMain" action="#{authBean.signIn}"
                                  value="Login"/>
-                <h:commandButton styleClass="buttonToMain"  action="#{authBean.signUp}"
+                <h:commandButton styleClass="buttonToMain" action="#{authBean.signUp}"
                                  value="Sign up"/>
-                <h:outputLabel value="#{messageBean.errorMessage}" rendered="#{not empty messageBean.errorMessage}" />
+                <h:outputLabel value="#{messageBean.errorMessage}" rendered="#{not empty messageBean.errorMessage}"/>
             </h:form>
             <br/>
 
-            <div id = "clockAndCalendar">
-                <table id = "startTable">
+            <div id="clockAndCalendar">
+                <table id="startTable">
                     <tr>
                         <td>
                             <div id="calendar">

@@ -85,6 +85,10 @@ public class AuthBean implements Serializable {
     public String signIn() {
         try {
             User receivedUser = userDao.findUserByUsername(username);
+            if (receivedUser == null) {
+                messageBean.setErrorMessage(ErrorMessage.WRONG_CREDENTIALS);
+                return null;
+            }
             System.out.println("ReceivedUsername is null: " + (receivedUser == null));
             if (receivedUser.getPassword().equals(password)) {
                 System.out.println("Passwords is the same");

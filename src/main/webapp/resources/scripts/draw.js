@@ -15,3 +15,20 @@ function getPoint(event) {
     document.getElementById("form:Y").value = -(y + cursorpt.y - 125) * r / 100;
     document.getElementById("form:areaClickBtn").click();
 }
+
+// $("Y").on("change", function() {
+//     var val = parseFloat(this.value) || 1;
+//     if (val > 5) {
+//        this.value = 5;
+//     } else if (val< -3) {
+//         this.value = -3;
+//     }
+//
+// });
+
+function validateY() {
+    var yField = document.getElementById("form.Y");
+    if (parseFloat(yField.value) > 5 || parseFloat(yField.value) < -3) {
+        yField.value = 0.0;
+    }
+}
