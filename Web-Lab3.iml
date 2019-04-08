@@ -35,5 +35,8 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Maven: org.primefaces:primefaces:6.2" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.faces:jsf-api:2.2.18" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.faces:jsf-impl:2.2.18" level="project" />
   </component>
 </module>
