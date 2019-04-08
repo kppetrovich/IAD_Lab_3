@@ -14,7 +14,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://java.sun.com/jsf/composite">
+      xmlns:xlink="http://www.w3.org/1999/xlink">
 
 
 <h:head>
@@ -64,7 +64,7 @@
                                     <tr>
                                         <td id="rowX">
                                             <h:outputLabel class="label" value="&#8226; Координата X: "/>
-                                            <h:outputText class="x_input" id="X_buttion" value="#{pointBean.x}" />
+                                            <h:outputText class="x_input" id="X_buttion" value="#{pointBean.x}"/>
                                             <br/>
                                             <h:commandButton class="input_X" value="-5" type="submit">
                                                 <f:setPropertyActionListener target="#{pointBean.x}" value="-5"/>
@@ -107,7 +107,7 @@
                                                         </pattern>
                                                     </defs>
                                                     <polygon points="0,0 250,0 250,250 0,250" fill="url(#image)"/>
-                                                    <ui:repeat value="#{pointBean.points}" var="point">
+                                                    <ui:repeat value="#{pointBean.points}" var="point" id="points">
                                                         <circle cx="#{100 / point.r * point.x + 125}"
                                                                 cy="#{250 - (100 / point.r * point.y + 125)}"
                                                                 stroke="black"
@@ -128,12 +128,12 @@
                                     <tr>
                                         <td id="rowY">
                                             <h:outputLabel class="label" value="&#8226; Координата Y: "/><br/>
-<!--                                            <h:inputText class="input_Y" id="Y" a:placeholder="(-5;3)" maxlength="6"-->
-<!--                                                         name="Y"-->
-<!--                                                         value="#{pointBean.y}">-->
-<!--                                                <f:ajax/>-->
-<!--                                                &lt;!&ndash;<f:validateDoubleRange minumim="-3" maximum="5"/>&ndash;&gt;-->
-<!--                                            </h:inputText><br/>-->
+                                            <!--                                            <h:inputText class="input_Y" id="Y" a:placeholder="(-5;3)" maxlength="6"-->
+                                            <!--                                                         name="Y"-->
+                                            <!--                                                         value="#{pointBean.y}">-->
+                                            <!--                                                <f:ajax/>-->
+                                            <!--                                                &lt;!&ndash;<f:validateDoubleRange minumim="-3" maximum="5"/>&ndash;&gt;-->
+                                            <!--                                            </h:inputText><br/>-->
                                             <h:outputText class="x_input" id="Y_buttion" value="#{pointBean.y}"/>
                                             <h:inputText styleClass="label" id="Y" value="#{pointBean.y}"/>
                                             <div id="error" class="error">
@@ -151,6 +151,7 @@
                                                 <f:selectItem itemValue="3" itemLabel="3"/>
                                                 <f:selectItem itemValue="4" itemLabel="4"/>
                                                 <f:selectItem itemValue="5" itemLabel="5"/>
+                                                <f:ajax render="graphPanel"/>
                                             </h:selectOneMenu>
                                         </td>
                                     </tr>
@@ -173,9 +174,7 @@
 
             <div id="history" class="container">
                 <p:dataTable id="resultsTable" class="input_table" value="#{pointBean.points}"
-                             var="elem" paginator="true" rows="10"
-                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                             rowsPerPageTemplate="5,10,15">
+                             var="elem">
 
                     <p:column headerText="X">
                         <h:outputText value="#{elem.x}"/>

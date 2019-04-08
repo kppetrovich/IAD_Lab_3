@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ManagedBean(name = "pointBean", eager = true)
 @SessionScoped
@@ -68,6 +69,14 @@ public class PointBean implements Serializable {
 
     public void setR(double r) {
         this.r = r;
+        List<Point> newPoints = points.stream()
+            .peek((element) -> {
+                element.setR(r);
+                element.setResult(isInArea(element.getX(), element.getY(), r));
+            })
+            .collect(Collectors.toList());
+        points.clear();
+        points.addAll(newPoints);
     }
 
     public List<Point> getPoints() {
@@ -85,6 +94,10 @@ public class PointBean implements Serializable {
     }
 
     public boolean isInArea() {
+        return isInArea(this.x, this.y, this.r);
+    }
+
+    private boolean isInArea(Double x, Double y, Double r) {
         if ((x >= 0) && (y >= 0) && (sqr(r / 2) >= sqr(x) + sqr(y))) {
             return true;
         }
