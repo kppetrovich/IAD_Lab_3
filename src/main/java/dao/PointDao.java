@@ -23,7 +23,7 @@ public class PointDao extends Dao {
                 double x = resultSet.getDouble("x");
                 double y = resultSet.getDouble("y");
                 double r = resultSet.getDouble("r");
-                boolean result = resultSet.getBoolean("result");
+                boolean result = resultSet.getInt("result") == 1;
                 points.add(new Point(x, y, r, result, user));
             }
             return points;
@@ -40,7 +40,7 @@ public class PointDao extends Dao {
             insertQuery.setDouble(1, point.getX());
             insertQuery.setDouble(2, point.getY());
             insertQuery.setDouble(3, point.getR());
-            insertQuery.setBoolean(4, point.isResult());
+            insertQuery.setInt(4, point.isResult() ? 1 : 0);
             insertQuery.setLong(5, point.getUser().getId());
 
             insertQuery.execute();

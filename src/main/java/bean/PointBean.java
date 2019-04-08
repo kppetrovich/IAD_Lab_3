@@ -77,6 +77,12 @@ public class PointBean implements Serializable {
         User owner = getUserFromContext();
         Point point = new Point(x, y, r, isInArea(), owner);
         points.add(point);
+        // FIXME debug mode on
+        System.out.println("X = " + x);
+        System.out.println("Y = " + y);
+        System.out.println("R = " + r);
+        System.out.println("IsInArea = " + isInArea());
+        System.out.println("Username = " + owner.getUsername());
 
         try {
             PointDao pointDao = new PointDao(DatabaseConfig.URL, DatabaseConfig.USERNAME, DatabaseConfig.PASSWORD);
