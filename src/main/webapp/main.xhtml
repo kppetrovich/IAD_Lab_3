@@ -21,7 +21,6 @@
     <title>Lab_3</title>
     <h:outputStylesheet library="styles" name="main.css"/>
     <link rel="stylesheet" href="resources/styles/main.css" type="text/css"/>
-    <h:outputScript library="scripts" name="validate.js"/>
     <h:outputScript library="scripts" name="draw.js"/>
 </h:head>
 
@@ -98,22 +97,34 @@
                                         <td style="width: 100px !important;"/>
                                         <td>
                                             <p:outputPanel id="graphPanel">
-                                                <svg id="picture" width="454" height="206" onclick="getPoint(event)" xmlns="http://www.w3.org/2000/svg">
+                                                <svg id="picture" width="454" height="206" onclick="getPoint(event)"
+                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <defs>
-                                                        <pattern id="image" patternUnits="userSpaceOnUse" width="454" height="206">
-                                                            <image x="0" y="0" width="454" height="206" xlink:href="resources/images/picture.svg"/>
+                                                        <pattern id="image" patternUnits="userSpaceOnUse" width="454"
+                                                                 height="206">
+                                                            <image x="0" y="0" width="400" height="400"
+                                                                   xlink:href="resources/images/picture.svg"/>
                                                         </pattern>
                                                     </defs>
                                                     <polygon points="0,0 454,0 454,206 0,206" fill="url(#image)"/>
-                                                    <text id="picture_x" x="445" y="115" font-family="monospace" font-size="14" fill="gray">#{pointBean.r}</text>
-                                                    <text id="picture_y" x="228" y="13" font-family="monospace" font-size="14" fill="gray">#{pointBean.r/2}</text>
+                                                    <text id="picture_x" x="445" y="115" font-family="monospace"
+                                                          font-size="14" fill="gray">#{pointBean.r}</text>
+                                                    <text id="picture_y" x="228" y="13" font-family="monospace"
+                                                          font-size="14" fill="gray">#{pointBean.r/2}</text>
                                                     <ui:repeat value="#{pointBean.points}" var="point">
-                                                        <circle cx="#{217 / pointBean.r * pointBean.x + 227}" cy="#{206 - (186 / pointBean.r * point.y + 103)}" stroke="black" fill="#{pointBean.isInArea eq true ? 'green' : 'red'}" class="point" r="3"/>
+                                                        <circle cx="#{217 / point.r * point.x + 227}"
+                                                                cy="#{206 - (186 / point.r * point.y + 103)}"
+                                                                stroke="black"
+                                                                fill="#{point.result eq true ? 'green' : 'red'}"
+                                                                class="point" r="3"/>
                                                     </ui:repeat>
                                                 </svg>
 
                                                 <p:inputText type="hidden" id="hiddenX" value="#{pointBean.x}"/>
-                                                <p:inputText type="hidden" id="hiddenY" value="#{pointBean.y}"/>
+                                                <p:inputText type="hidden" id="hiddenY" value="#{pointBean.hiddenY}"/>
+                                                <h:commandButton style="display:none" update="graphPanel Y"
+                                                                 id="areaClickBtn"
+                                                                 action="#{pointBean.addPoint()}"/>
                                             </p:outputPanel>
                                         </td>
                                     </tr>
@@ -121,11 +132,14 @@
                                     <tr>
                                         <td id="rowY">
                                             <h:outputLabel class="label" value="&#8226; Координата Y: "/><br/>
-                                            <h:inputText class="input_Y" id="Y" a:placeholder="(-5;3)" maxlength="6"
-                                                         name="Y"
-                                                         value="#{pointBean.y}" onfocus="removeError();">
-                                                <f:validateDoubleRange minumim="-3" maximum="5"/>
-                                            </h:inputText><br/>
+<!--                                            <h:inputText class="input_Y" id="Y" a:placeholder="(-5;3)" maxlength="6"-->
+<!--                                                         name="Y"-->
+<!--                                                         value="#{pointBean.y}">-->
+<!--                                                <f:ajax/>-->
+<!--                                                &lt;!&ndash;<f:validateDoubleRange minumim="-3" maximum="5"/>&ndash;&gt;-->
+<!--                                            </h:inputText><br/>-->
+                                            <h:outputText class="x_input" id="Y_buttion" value="#{pointBean.y}"/>
+                                            <h:inputText styleClass="label" id="Y" value="#{pointBean.y}"/>
                                             <div id="error" class="error">
                                             </div>
                                         </td>
@@ -151,28 +165,7 @@
                                         </td>
                                     </tr>
                                 </table>
-                                <p:dataTable id="resultsTable" class="res" value="#{pointBean.points}"
-                                             var="elem" paginator="true" rows="10"
-                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                                             rowsPerPageTemplate="5,10,15">
 
-                                    <p:column headerText="X">
-                                        <h:outputText value="#{elem.x}"/>
-                                    </p:column>
-
-                                    <p:column headerText="Y">
-                                        <h:outputText value="#{elem.y}"/>
-                                    </p:column>
-
-                                    <p:column headerText="R">
-                                        <h:outputText value="#{elem.r}"/>
-                                    </p:column>
-
-                                    <p:column headerText="IsHit">
-                                        <h:outputText value="#{elem.hit}"/>
-                                    </p:column>
-
-                                </p:dataTable>
                             </h:form>
 
 
@@ -180,6 +173,31 @@
                     </tr>
                 </table>
 
+            </div>
+
+            <div id="history" class="container">
+                <p:dataTable id="resultsTable" class="input_table" value="#{pointBean.points}"
+                             var="elem" paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="5,10,15">
+
+                    <p:column headerText="X">
+                        <h:outputText value="#{elem.x}"/>
+                    </p:column>
+
+                    <p:column headerText="Y">
+                        <h:outputText value="#{elem.y}"/>
+                    </p:column>
+
+                    <p:column headerText="R">
+                        <h:outputText value="#{elem.r}"/>
+                    </p:column>
+
+                    <p:column headerText="IsInArea">
+                        <h:outputText value="#{elem.result}"/>
+                    </p:column>
+
+                </p:dataTable>
             </div>
 
 

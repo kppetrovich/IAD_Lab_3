@@ -130,4 +130,15 @@ public class PointBean implements Serializable {
     public void setMessageBean(MessageBean messageBean) {
         this.messageBean = messageBean;
     }
+
+    private double hiddenY = 0.0;
+
+    public double getHiddenY() {
+        return hiddenY;
+    }
+
+    public void setHiddenY(double hiddenY) {
+        this.hiddenY = hiddenY;
+        this.y = hiddenY;
+    }
 }
